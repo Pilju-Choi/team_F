@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.WordMapper">
+
+  <select id="getDaysByLevel" resultType="int">
+    SELECT DISTINCT word_day 
+    FROM tbl_word 
+    WHERE word_level = #{level} 
+    ORDER BY word_day ASC
+  </select>
+
+  <select id="getWords" resultType="org.zerock.domain.WordVO">
+    SELECT *
+    FROM tbl_word 
+    WHERE word_level = #{level} 
+      AND word_day = #{day}
+    ORDER BY word_id ASC
+  </select>
+
+<select id="getRandomMeanings" resultType="string">
+  <![CDATA[
+    SELECT word_mean 
+    FROM (
+      SELECT word_mean 
+      FROM tbl_word
+      WHERE word_id != #{wordId}
+      ORDER BY dbms_random.value
+    )
+    WHERE ROWNUM <= 3
+  ]]>
+</select>
+
+  <update id="saveScore">
+    MERGE INTO tbl_my_score t
+    USING (
+      SELECT #{userId} AS u_id,
+             #{level} AS lv,
+             #{day} AS dy,
+             #{score} AS sc
+      FROM dual
+    ) s
+    ON (t.user_id = s.u_id AND t.word_level = s.lv AND t.word_day = s.dy)
+
+    WHEN MATCHED THEN
+      UPDATE SET 
+        t.score = s.sc,
+        t.update_date = SYSDATE
+      <![CDATA[
+        WHERE t.score < s.sc
+      ]]>
+
+    WHEN NOT MATCHED THEN
+      INSERT (user_id, word_level, word_day, score)
+      VALUES (s.u_id, s.lv, s.dy, s.sc)
+  </update>
+
+  <select id="getStatusList" resultType="org.zerock.domain.DayStatusDTO">
+    SELECT
+      w.word_day AS "day",
+      NVL(s.score, 0) AS "score"
+    FROM (
+      SELECT DISTINCT word_day
+      FROM tbl_word
+      WHERE word_level = #{level}
+    ) w
+    LEFT JOIN tbl_my_score s
+      ON w.word_day = s.word_day
+     AND s.word_level = #{level}
+     AND s.user_id = #{userId}
+    ORDER BY w.word_day ASC
+  </select>
+
+  <select id="getRankList" resultType="org.zerock.domain.RankVO">
+    SELECT
+      m.user_id AS userId,
+      m.user_name AS userName,
+      SUM(s.score) AS totalScore
+    FROM tbl_my_score s
+    JOIN tbl_member m 
+      ON s.user_id = m.user_id
+    WHERE s.word_level = #{level}
+    GROUP BY m.user_id, m.user_name
+    ORDER BY totalScore DESC
+  </select>
+
+<select id="getOverallStats" resultType="org.zerock.domain.StatsDTO">
+    SELECT
+        #{userId} AS userId,
+        COUNT(*) AS totalWords,
+        SUM(CASE WHEN score > 0 THEN 1 ELSE 0 END) AS correctWords,
+        COUNT(DISTINCT word_day) AS uniqueWords,
+        ROUND(
+            SUM(CASE WHEN score > 0 THEN 1 ELSE 0 END)
+            / NULLIF(COUNT(*), 0) * 100,
+            2
+        ) AS accuracyRate
+    FROM tbl_my_score
+    WHERE user_id = #{userId}
+</select>
+
+<select id="getLevelStats" resultType="org.zerock.domain.LevelStatsDTO">
+    SELECT
+        s.word_level AS lvl,
+        COUNT(*) AS totalCount,
+        SUM(CASE WHEN s.score > 0 THEN 1 ELSE 0 END) AS correctCount
+    FROM tbl_my_score s
+    WHERE s.user_id = #{userId}
+    GROUP BY s.word_level
+    ORDER BY s.word_level
+</select>
+
+</mapper>
