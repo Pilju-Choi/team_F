@@ -46,13 +46,17 @@ Spring Security를 적용하여 개인정보를 안전하게 보호하며, 퀴�
 
 ## 5. 실행 화면
 ### 메인 페이지 - **로그인 전**
-<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/01670389-3a99-4991-8099-47580af6cbde" />
+<img width="600" height="300" alt="image" src="https://github.com/user-attachments/assets/01670389-3a99-4991-8099-47580af6cbde" />
 
 ### 로그인/로그아웃 
 <img width="460" height="422" alt="image" src="https://github.com/user-attachments/assets/757fae67-ef8c-4182-9213-36fdfd9a6814" />
 
 ### 메인 페이지 - **로그인 후**
-<img width="1911" height="910" alt="image" src="https://github.com/user-attachments/assets/9eacc46b-b7b4-4417-bc98-72f0f146fcbf" />
+<img width="600" height="300" alt="image" src="https://github.com/user-attachments/assets/9eacc46b-b7b4-4417-bc98-72f0f146fcbf" />
+
+### 학습 난이도 선택
+<img width="600" height="300" alt="image" src="https://github.com/user-attachments/assets/d1a8a3f1-c75b-41aa-a44a-fab568781109" />
+
 
 
 
