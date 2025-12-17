@@ -19,5 +19,5 @@
 * Tool: Eclipse, Maven
 
 ## 시스템 아키텍처 및 설계
-<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/43e0d67f-032e-4958-b6a9-247400a8e578" />
+<img width="700" height="530" alt="image" src="https://github.com/user-attachments/assets/43e0d67f-032e-4958-b6a9-247400a8e578" />
 
