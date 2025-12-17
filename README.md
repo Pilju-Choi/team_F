@@ -8,6 +8,9 @@
 * **오답 노트**: 틀린 단어만 모아서 다시 복습합니다.
 
 ##  기술 스택
-* **Frontend**: HTML, CSS, JavaScript (또는 React 등 사용한 기술)
-* **Backend**: (사용한 언어/프레임워크 적기)
-* **Database**: (사용했다면 적기)
+* Language: Java 8+
+* Framework: Spring Framework 5, Spring Security 
+* Database: MySQL (또는 Oracle), MyBatis
+* Server: Apache Tomcat 9.0 
+* Frontend: JSP, JSTL
+* Tool: Eclipse, Maven
