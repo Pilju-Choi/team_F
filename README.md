@@ -57,6 +57,33 @@ Spring Security를 적용하여 개인정보를 안전하게 보호하며, 퀴�
 ### 학습 난이도 선택
 <img width="600" height="300" alt="image" src="https://github.com/user-attachments/assets/d1a8a3f1-c75b-41aa-a44a-fab568781109" />
 
+### 단어 학습
+<img width="600" height="300" alt="image" src="https://github.com/user-attachments/assets/c41e01bf-72c6-4fcf-a662-e246b61c2f8a" />
+
+### 단어 퀴즈 
+<img width="300" height="400" alt="image" src="https://github.com/user-attachments/assets/fd390691-f59d-440c-b68e-f2b698a5d56c" />
+
+### 랭킹 시스템
+<img width="1646" height="895" alt="image" src="https://github.com/user-attachments/assets/1554dd79-625f-4ee4-8103-b19b9fc0e1fd" />
+
+### 마이페이지
+<img width="1641" height="835" alt="image" src="https://github.com/user-attachments/assets/66b5156c-c4d9-4d2e-8651-d980fa4b7ef4" />
+
+## 6. 핵심 보안 설정
+본 프로젝트는 URI별 권한 제어와 CSRF 방어에 중점을 두었습니다.
+
+* 접근 권한 제어
+    * /sample/member: 로그인한 회원만 접근 가능
+    * /sample/admin: 관리자 권한 보유자만 접근 가능
+    * 그 외 페이지: 모든 사용자 접근 허용 (permitAll)
+ 
+* 커스텀 핸들러 구현
+    * CustomLoginSuccessHandler: 로그인 성공 시 사용자의 권한(Role)을 확인하여 관리자/회원 페이지로 자동 이동
+    * CustomAccessDeniedHandler: 권한 없는 페이지 접근 시 경고 메시지와 함께 에러 페이지로 리다이렉트
+
+
+
+
 
 
 
