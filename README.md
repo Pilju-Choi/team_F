@@ -44,3 +44,8 @@ Spring Security를 적용하여 개인정보를 안전하게 보호하며, 퀴�
 * Frontend: JSP, JSTL
 * Tool: Eclipse, Maven
 
+## 5. 실행 화면
+### 메인 페이지 
+<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/01670389-3a99-4991-8099-47580af6cbde" />
+
+
